@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+#div1{
+	width: 500px;
+	height: 250px;
+	border: 1px solid gray;
+	overflow: auto;
+}	
+</style>
+</head>
+<body>
+	
+<div id="div1"></div>	
+<input type="text" id="input1" />
+<input type="button" id="btn" value="按钮" />
+
+<script>
+function replaceAll(str, fil, rep){
+	do{
+		str = str.replace(fil, rep);
+	}while( str.indexOf(fil)>-1 );
+	return str;
+}
+	
+// 定义了敏感词	
+var arr = ["杀人", "放火", "抢劫", "贩毒", "金三胖"];	
+// 处理字符串
+function chkStr(str){
+	//敏感词循环
+	arr.forEach(function(v){
+		str = str.replace(v, "*");
+		//str = str.replace(eval("/"+v+"/g"), "*");
+		//str = replaceAll(str, v, "*");
+	});
+	return str;
+}
+// 提交数据
+btn.onclick = function(){
+	var str = input1.value;
+	if( str!="" ){		
+		div1.innerHTML += chkStr(str)+"<br>";
+		input1.value = "";
+	}
+}
+</script>
+
+</body>
+</html>
